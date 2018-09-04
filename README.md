@@ -1,27 +1,77 @@
-# Provider
+# ngx-data-provider
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0-rc.8.
+Use the data provider component pattern in Angular.
 
-## Development server
+## Simple Example
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```html
+<ngx-data-provider key="theme" [data]="{ theme: 'dark' }">
+  ...
+    ...
+      <ngx-data-consumer key="theme">
+        <ng-template let-theme="theme">
+          {{theme}} <-- 'dark'
+        </ng-template>
+      </ngx-data-consumer>
+    ...
+  ...
+</ngx-data-provider>
+```
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. `npm install ngx-data-provider`
+2. Import the `DataProviderModule.forRoot()` in your root module.
+3. Create an `<ngx-data-provider>` with some `key` and `data`
+4. Consume that `data` anywhere in the content of the `<ngx-data-provider>` with an `<ngx-data-consumer>` using the same `key`.
 
-## Build
+- The `<ng-template>` inside of `<ngx-data-consumer>` can reference any properties provided in the `data`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Custom providers
 
-## Running unit tests
+You may want to make your own custom providers that directly handle your own data.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```ts
+@Component({
+  selector: 'theme-provider',
+  template: `
+  <ngx-data-provider key="theme" [data]="{ theme: 'dark' }">
+    <ng-content></ng-content>
+  </ngx-data-provider>
+  `,
+})
+export class ThemeProviderComponent {}
 
-## Running end-to-end tests
+@Component({
+  selector: 'theme-consumer',
+  template: `
+  <ngx-data-consumer key="theme">
+    <ng-content></ng-content>
+  </ngx-data-consumer>
+  `,
+})
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Usage:
 
-## Further help
+```html
+<theme-provider>
+  ...
+    ...
+      <theme-consumer>
+        <ng-template let-theme="theme">
+          {{theme}} <-- 'dark'
+        </ng-template>
+      </theme-consumer>
+    ...
+  ...
+</theme-provider>
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+- Kent C Dodds suggested I make this little library to make a code snippet for our Framework Summit talk more concise. Talk Driven Development in action!
