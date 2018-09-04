@@ -74,4 +74,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-- Kent C Dodds suggested I make this little library to make a code snippet for our Framework Summit talk more concise. Talk Driven Development in action!
+- [Kent C. Dodds](https://twitter.com/kentcdodds) suggested I make this little library to make a code snippet for our [Framework Summit](http://frameworksummit.com) talk more concise. [Conference Driven Development](https://twitter.com/NikkitaFTW/status/973258530777165824) in action!
